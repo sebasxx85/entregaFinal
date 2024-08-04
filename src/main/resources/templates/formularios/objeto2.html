@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<main class="container">
+    <h1>Formulario validaciones</h1>
+    <form name="form2" th:object="${usuario2}" th:action="@{/formularios/form2}" method="post">
+        <div class="form-group">
+            <label for="paisId">Pais Id</label>
+            <select th:field="*{paisId}" id="paisId" class="form-control">
+                <option th:each="pais : ${paises}" th:value="${pais.id}" th:text="${pais.nombre}"></option>
+            </select>
+            <div th:if="${errores != null && errores.containsKey('paisId')}" th:text="${errores.paisId}" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" th:field="*{username}" id="username" class="form-control"/>
+            <div th:if="${errores != null && errores.containsKey('username')}" th:text="${errores.username}" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="correo">Email</label>
+            <input type="email" th:field="*{correo}" id="correo" class="form-control"/>
+            <div th:if="${errores != null && errores.containsKey('correo')}" th:text="${errores.correo}" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" th:field="*{password}" id="password" class="form-control"/>
+            <div th:if="${errores != null && errores.containsKey('password')}" th:text="${errores.password}" class="text-danger"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</main>
+</body>
+</html>
