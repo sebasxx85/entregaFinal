@@ -16,12 +16,26 @@ public class CartService {
     @Autowired
     private CartRepository cartRepository;
 
-    public Cart createCart(Cart cart) {
+    public Cart addProductToCart(Long clid, Long pid, Integer quantity) {
+        Cart cart = new Cart();
+        // Aquí deberías agregar la lógica para asociar el cliente y el producto al carrito
+        cart.setAmount(quantity);
+        // Setear otros atributos necesarios
         return cartRepository.save(cart);
     }
 
-    public List<Cart> getAllCarts() {
-        return cartRepository.findAll();
+    public List<Cart> getCartsByClientId(Long clid) {
+        return cartRepository.findByClientId(clid);
+    }
+
+    public ResponseEntity<Void> removeProductFromCart(Long cartId) {
+        Optional<Cart> cartOptional = cartRepository.findById(cartId);
+        if (cartOptional.isPresent()) {
+            cartRepository.delete(cartOptional.get());
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     public Optional<Cart> getCartById(Long id) {

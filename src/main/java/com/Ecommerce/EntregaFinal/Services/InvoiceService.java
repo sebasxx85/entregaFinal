@@ -28,6 +28,10 @@ public class InvoiceService {
         return invoiceRepository.findById(id);
     }
 
+    public List<Invoice> getInvoicesByClientId(Long clientId) {
+        return invoiceRepository.findByClientId(clientId);
+    }
+
     public ResponseEntity<Invoice> updateInvoice(Long id, Invoice invoiceDetails) {
         Optional<Invoice> invoiceOptional = invoiceRepository.findById(id);
         if (invoiceOptional.isPresent()) {

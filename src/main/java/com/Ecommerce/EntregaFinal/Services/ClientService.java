@@ -33,4 +33,12 @@ public class ClientService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    public List<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
+
+    public Optional<Client> getClientById(Long id) {
+        return clientRepository.findById(id);
+    }
 }
